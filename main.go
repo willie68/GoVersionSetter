@@ -217,7 +217,6 @@ func SetGoResVersion() {
 					start[key] = version.SemanticString()
 				}
 			}
-			fmt.Printf("+%s", key)
 		}
 		fmt.Println()
 	}
