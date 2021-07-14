@@ -3,7 +3,10 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [       {
+    "configurations": [
+
+
+           {
         "name": "GoVersionSetter",
         "type": "go",
         "request": "launch",
@@ -14,11 +17,11 @@
         "args": [
             "-i",
             "--env",
-            "gores",
+            "ino",
             "-f",
-            "H:/privat/git-sourcen/ReCoS-Remote-Command-Service/service/winres/winres.json",
+            "C:/e-platte/daten/git-sourcen/Arduino_TPS/TPS/version.h",
             "-o",
-            "RT_MANIFEST/#1/0409/identity/version,RT_VERSION/#1/0000/fixed/file_version,RT_VERSION/#1/0000/fixed/product_version,RT_VERSION/#1/0000/info/0409/ProductVersion,RT_VERSION/#1/0000/info/0409/FileVersion",
+            "#ifndef TPS_VERSIN_H\\r\\n#define TPS_VERSION_H\\r\\n#define TPS_VERSION \"%s\"\\r\\n#endif",
         ]
     },
 ]

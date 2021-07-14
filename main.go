@@ -165,7 +165,46 @@ func processVersion() {
 			SetVisualStudioVersion()
 		case "gores":
 			SetGoResVersion()
+		case "go":
+			SetGoVersion()
+		case "ino":
+			SetInoVersion()
 		}
+	}
+}
+
+func SetInoVersion() {
+	fmt.Println("changing ino version")
+
+	if property == "" {
+		fmt.Println("no property found")
+		return
+	}
+
+	//parts := strings.Split(property, ",")
+
+	property = strings.ReplaceAll(property, "\\r", "\r")
+	property = strings.ReplaceAll(property, "\\n", "\n")
+	fmt.Println(property)
+
+	jsonStr := fmt.Sprintf(property, version.SemanticStringWOPrerelease())
+
+	err := ioutil.WriteFile(file, []byte(jsonStr), 0666)
+	if err != nil {
+		fmt.Printf("failed writing json: %v", err)
+		return
+	}
+}
+
+func SetGoVersion() {
+	fmt.Println("changing go version")
+
+	jsonStr := fmt.Sprintf("{\"Major\":%d,\"Minor\":%d,\"Patch\":%d,\"Special\":\"%s\"}", version.Major, version.Minor, version.Patch, version.Prerelease)
+
+	err := ioutil.WriteFile(file, []byte(jsonStr), 0666)
+	if err != nil {
+		fmt.Printf("failed writing json: %v", err)
+		return
 	}
 }
 
@@ -180,7 +219,7 @@ func SetGoResVersion() {
 	parts := strings.Split(property, ",")
 
 	if _, err := os.Stat(file); os.IsNotExist(err) {
-		fmt.Printf("can't find npm file: %s", file)
+		fmt.Printf("can't find gores file: %s", file)
 		return
 	}
 
