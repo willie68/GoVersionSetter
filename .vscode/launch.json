@@ -4,8 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
-
            {
         "name": "GoVersionSetter",
         "type": "go",
@@ -16,12 +14,12 @@
         "env": {},
         "args": [
             "-i",
-            "--env",
-            "ino",
+            "-e",
+            "txt",
             "-f",
-            "C:/e-platte/daten/git-sourcen/Arduino_TPS/TPS/version.h",
+            "C:/e-platte/daten/git-sourcen/Arduino_TPS/builder/build_tps.sh",
             "-o",
-            "#ifndef TPS_VERSIN_H\\r\\n#define TPS_VERSION_H\\r\\n#define TPS_VERSION \"%s\"\\r\\n#endif",
+            "0,TPS_VERSION=\"%s\"",
         ]
     },
 ]

@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 
 	flag "github.com/spf13/pflag"
@@ -169,6 +170,50 @@ func processVersion() {
 			SetGoVersion()
 		case "ino":
 			SetInoVersion()
+		case "txt":
+			SetTxtVersion()
+		}
+	}
+}
+
+func SetTxtVersion() {
+	fmt.Println("changing txt version")
+
+	if property == "" {
+		fmt.Println("no property found")
+		return
+	}
+
+	parts := strings.Split(property, ",")
+	line := parts[1]
+	lineNumber, err := strconv.Atoi(parts[0])
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(property)
+
+	line = fmt.Sprintf(line, version.SemanticStringWOPrerelease())
+
+	data, err := ioutil.ReadFile(file)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	sliceData := strings.Split(string(data), "\n")
+
+	sliceData[lineNumber] = line
+	f, err := os.Create(file)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer f.Close()
+	for _, dataLine := range sliceData {
+		_, err := f.WriteString(dataLine + "\n")
+		if err != nil {
+			fmt.Printf("failed writing txt file: %v", err)
+			return
 		}
 	}
 }
