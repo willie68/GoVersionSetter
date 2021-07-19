@@ -209,11 +209,14 @@ func SetTxtVersion() {
 		fmt.Println(err)
 	}
 	defer f.Close()
-	for _, dataLine := range sliceData {
-		_, err := f.WriteString(dataLine + "\n")
+	for x, dataLine := range sliceData {
+		_, err := f.WriteString(dataLine)
 		if err != nil {
 			fmt.Printf("failed writing txt file: %v", err)
 			return
+		}
+		if x < (len(sliceData) - 1) {
+			f.WriteString("\n")
 		}
 	}
 }
